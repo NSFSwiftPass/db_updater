@@ -1,0 +1,197 @@
+HD|3688278|0006666929||WQVN846|A|AT|04/08/2015|04/08/2027||||N|N|N|N|N|N|N|N||Y|Y|||Y|||N|Y|Michael|P|Goggin||Asst. Secretary of Manager||||||||12/18/2018|01/05/2021|97||||||||||
+HD|3688279|0006666929||WQVN847|A|AT|04/08/2015|04/08/2027||||N|N|N|N|N|N|N|N||Y|Y|||Y|||N|Y|Michael|P|Goggin||Asst. Secretary of Manager||||||||12/18/2018|01/05/2021|97||||||||||
+HD|3688443|0006669283||WQVP211|A|AT|04/08/2015|04/08/2027||||N|N|N|N|N|N|N|N||Y||||Y|||N|Y|John|T|Scott|III|Duly Authorized Representative||||||||11/01/2016|01/05/2021|97||||||||||
+HD|3748270|0006670613||WQWQ704|A|AT|10/27/2015|10/27/2027||||N|N|N|N|N|N|N|N||Y||||Y|||N|N|Allen|M|Todd||Asst Sec of Mgr of Mgr of Mgr||||||||10/27/2015|10/11/2019|97||||||||||
+HD|3748318|0006670613||WQWQ752|A|AT|10/27/2015|10/27/2027||||N|N|N|N|N|N|N|N||Y||||Y|||N|N|Allen|M|Todd||Asst Sec of Mgr of Mgr of Mgr||||||||10/27/2015|10/11/2019|97||||||||||
+HD|3748521|0006670667||WQWQ955|A|AT|10/27/2015|10/27/2027||||N|N|N|N|N|N|N|N||Y||||Y|||N|Y|John||Muleta||CEO of Atelum LLC||||||||03/17/2020|03/19/2020|97||||||||||
+EN|3688278|||WQVN846|CL||AT&T Mobility LLC|Cecil|J|Mathew||8556997073|2147466410|FCCMW@att.com|208 S Akard St., RM 1015|Dallas|TX|75202||Michael P Goggin|||||||||
+EN|3688279|||WQVN847|CL||AT&T Mobility LLC|Cecil|J|Mathew||8556997073|2147466410|FCCMW@ATT.COM|208 S Akard St. RM 1015|Dallas|TX|75202||Michael P Goggin|||||||||
+EN|3688443|||WQVP211|CL||Verizon Wireless|Licensing||Manager||7707971070|7707971036|LicensingCompliance@VerizonWireless.com|5055 North Point Pkwy, NP2NE Network Engineering|Alpharetta|GA|30022||Regulatory|||||||||
+EN|3748270|||WQWQ704|CL||Northstar Wireless, LLC|||||9074592000|9074592060|todda@doyon.com|1 Doyon Place Suite 300|Fairbanks|AK|997012941||Allen M Todd|||||||||
+EN|3748318|||WQWQ752|CL||Northstar Wireless, LLC|||||9074592000|9074592060|todda@doyon.com|1 Doyon Place Suite 300|Fairbanks|AK|997012941||Allen M Todd|||||||||
+EN|3748521|||WQWQ955|CL||Hogan Lovells US LLP|Ari|Q|Fitzgerald||2026375423|8888040321|Ari.Fitzgerald@hoganlovells.com|555 13th St. NW|Washington|DC|20004||Ari Fitzgerald|||||||||
+EN|3688278|||WQVN846|L|L01145911|AT&T Mobility Spectrum LLC|||||8556997073|2147466410|FCCMW@att.com|208 S. Akard St., RM 1015|Dallas|TX|75202||Cecil J Mathew|000|0014980726|L||||||
+EN|3688279|||WQVN847|L|L01145911|AT&T Mobility Spectrum LLC|||||8556997073|2147466410|FCCMW@att.com|208 S. Akard St., RM 1015|Dallas|TX|75202||Cecil J Mathew|000|0014980726|L||||||
+EN|3688443|||WQVP211|L|L00000722|Cellco Partnership|||||7707971070|7707971036|licensingcompliance@verizonwireless.com|5055 North Point Pkwy, NP2NE Network Engineering|Alpharetta|GA|30022||Regulatory|000|0003290673|D||||||
+EN|3748270|||WQWQ704|L|L01891894|Northstar Wireless, LLC|||||9074592000|9074592060|todda@doyon.com|1 Doyon Place Suite 300|Fairbanks|AK|997012941||Allen M Todd|000|0023917453|L||||||
+EN|3748318|||WQWQ752|L|L01891894|Northstar Wireless, LLC|||||9074592000|9074592060|todda@doyon.com|1 Doyon Place Suite 300|Fairbanks|AK|997012941||Allen M Todd|000|0023917453|L||||||
+EN|3748521|||WQWQ955|L|L01891895|SNR Wireless LicenseCo, LLC|||||5714829111|8888040321|john@atelum.com|2519 N. Ocean Blvd, #303|Boca Raton|FL|33431||John Muleta|000|0023907074|L||||||
+HS|3688278||WQVN846|04/08/2015|LIISS
+HS|3688278||WQVN846|08/18/2016|ESUAPR
+HS|3688278||WQVN846|08/19/2016|LIAUA
+HS|3688278||WQVN846|05/24/2017|LIASS
+HS|3688278||WQVN846|06/08/2017|LIAUA
+HS|3688278||WQVN846|12/30/2016|LIASS
+HS|3688278||WQVN846|08/24/2018|LIAUA
+HS|3688278||WQVN846|08/29/2018|LIAUA
+HS|3688278||WQVN846|02/21/2019|LIPND
+HS|3688278||WQVN846|01/05/2021|LETCNS
+HS|3688279||WQVN847|04/08/2015|LIISS
+HS|3688279||WQVN847|08/18/2016|ESUAPR
+HS|3688279||WQVN847|08/19/2016|LIAUA
+HS|3688279||WQVN847|05/24/2017|LIASS
+HS|3688279||WQVN847|06/08/2017|LIAUA
+HS|3688279||WQVN847|12/30/2016|LIASS
+HS|3688279||WQVN847|08/24/2018|LIAUA
+HS|3688279||WQVN847|09/29/2018|LIAUA
+HS|3688279||WQVN847|02/21/2019|LIPND
+HS|3688279||WQVN847|01/05/2021|LETCNS
+HS|3688443||WQVP211|04/08/2015|LIISS
+HS|3688443||WQVP211|04/15/2015|ESUAPR
+HS|3688443||WQVP211|04/16/2015|LIAUA
+HS|3688443||WQVP211|01/28/2016|ESUAPR
+HS|3688443||WQVP211|03/24/2016|LITRAN
+HS|3688443||WQVP211|07/27/2016|ESUAPR
+HS|3688443||WQVP211|08/30/2016|LITRAN
+HS|3688443||WQVP211|11/01/2016|LIAUA
+HS|3688443||WQVP211|12/05/2017|LITRAN
+HS|3688443||WQVP211|08/13/2020|LITRAN
+HS|3688443||WQVP211|01/05/2021|LETCNS
+HS|3748270||WQWQ704|10/27/2015|LIISS
+HS|3748270||WQWQ704|10/27/2015|COR
+HS|3748270||WQWQ704|10/27/2015|COR
+HS|3748270||WQWQ704|10/27/2015|COR
+HS|3748270||WQWQ704|10/27/2015|COR
+HS|3748270||WQWQ704|10/28/2015|COR
+HS|3748270||WQWQ704|10/28/2015|COR
+HS|3748318||WQWQ752|10/27/2015|LIISS
+HS|3748318||WQWQ752|10/27/2015|COR
+HS|3748318||WQWQ752|10/27/2015|COR
+HS|3748318||WQWQ752|10/27/2015|COR
+HS|3748318||WQWQ752|10/27/2015|COR
+HS|3748318||WQWQ752|10/28/2015|COR
+HS|3748318||WQWQ752|10/28/2015|COR
+HS|3748521||WQWQ955|10/27/2015|LIISS
+HS|3748521||WQWQ955|10/27/2015|COR
+HS|3748521||WQWQ955|10/27/2015|COR
+HS|3748521||WQWQ955|10/27/2015|COR
+HS|3748521||WQWQ955|10/29/2015|COR
+HS|3748521||WQWQ955|10/29/2015|COR
+MK|3688278|||WQVN846|BEA141|H|1|Denver-Boulder-Greeley, CO-KS-||||4685203|N|||||||||
+MK|3688279|||WQVN847|BEA141|I|1|Denver-Boulder-Greeley, CO-KS-||||4685203|N|||||||||
+MK|3688443|||WQVP211|BEA141|J|0|Denver-Boulder-Greeley, CO-KS-||||4685203|N|||||||||
+MK|3748270|||WQWQ704|BEA141|B1|0|Denver-Boulder-Greeley, CO-KS-||||4685203|N|||||||||
+MK|3748318|||WQWQ752|CMA019|G|0|Denver-Boulder, CO||||2733780|N|||||||||
+MK|3748521|||WQWQ955|BEA141|A1|0|Denver-Boulder-Greeley, CO-KS-||||4685203|N|||||||||
+MP|3688278|||WQVN846|BEA141|08053: HINSDALE, CO|843|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08057: JACKSON, CO|1394|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08027: CUSTER, CO|4255|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08091: OURAY, CO|4436|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08047: GILPIN, CO|5441|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08103: RIO BLANCO, CO|6666|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08065: LAKE, CO|7310|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08113: SAN MIGUEL, CO|7359|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08019: CLEAR CREEK, CO|9088|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08081: MOFFAT, CO|13795|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08049: GRAND, CO|14843|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08093: PARK, CO|16206|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08097: PITKIN, CO|17148|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08015: CHAFFEE, CO|17809|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08119: TELLER, CO|23350|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08107: ROUTT, CO|23509|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08117: SUMMIT, CO|27994|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08029: DELTA, CO|30952|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08085: MONTROSE, CO|41276|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08043: FREMONT, CO|46824|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08037: EAGLE, CO|52197|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08045: GARFIELD, CO|56389|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08077: MESA, CO|146723|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08123: WELD, CO|252908|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08035: DOUGLAS, CO|285465|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08069: LARIMER, CO|299630|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08013: BOULDER, CO|318495|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08001: ADAMS, CO|470593|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08059: JEFFERSON, CO|537431|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08005: ARAPAHOE, CO|572003|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08031: DENVER, CO|600158|I|129999|||D|15|
+MP|3688278|||WQVN846|BEA141|08041: EL PASO, CO|622263|I|129999|||D|15|
+MP|3688279|||WQVN847|BEA141|08053: HINSDALE, CO|843|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08057: JACKSON, CO|1394|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08027: CUSTER, CO|4255|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08091: OURAY, CO|4436|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08047: GILPIN, CO|5441|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08103: RIO BLANCO, CO|6666|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08065: LAKE, CO|7310|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08113: SAN MIGUEL, CO|7359|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08019: CLEAR CREEK, CO|9088|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08081: MOFFAT, CO|13795|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08049: GRAND, CO|14843|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08093: PARK, CO|16206|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08097: PITKIN, CO|17148|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08015: CHAFFEE, CO|17809|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08119: TELLER, CO|23350|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08107: ROUTT, CO|23509|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08117: SUMMIT, CO|27994|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08029: DELTA, CO|30952|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08085: MONTROSE, CO|41276|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08043: FREMONT, CO|46824|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08037: EAGLE, CO|52197|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08045: GARFIELD, CO|56389|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08077: MESA, CO|146723|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08123: WELD, CO|252908|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08035: DOUGLAS, CO|285465|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08069: LARIMER, CO|299630|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08013: BOULDER, CO|318495|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08001: ADAMS, CO|470593|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08059: JEFFERSON, CO|537431|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08005: ARAPAHOE, CO|572003|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08031: DENVER, CO|600158|I|130001|||D|17|
+MP|3688279|||WQVN847|BEA141|08041: EL PASO, CO|622263|I|130001|||D|17|
+MF|3688278|||WQVN846|129999|1760.00000000|1765.00000000|D|15
+MF|3688278|||WQVN846|129999|2160.00000000|2165.00000000|D|15
+MF|3688279|||WQVN847|130001|1765.00000000|1770.00000000|D|17
+MF|3688279|||WQVN847|130001|2165.00000000|2170.00000000|D|17
+MF|3688443|||WQVP211|106546|1770.00000000|1780.00000000|D|1
+MF|3688443|||WQVP211|106546|2170.00000000|2180.00000000|D|1
+MF|3748270|||WQWQ704|108354|1700.00000000|1710.00000000|D|1
+MF|3748318|||WQWQ752|108402|1755.00000000|1760.00000000|D|1
+MF|3748318|||WQWQ752|108402|2155.00000000|2160.00000000|D|1
+MF|3748521|||WQWQ955|108100|1695.00000000|1700.00000000|D|1
+SF|3748270|||WQWQ704|P|11897277|1|In accordance with the Commission�s MO&O, FCC 15-104 (rel. Aug. 18, 2015), and subject to WTB Letter to Northstar, DA 15-1108 (rel. Oct. 1, 2015), a copy of which is attached to this authorization in ULS, this authorization is granted in part to Northstar||
+SF|3748270|||WQWQ704|P|11897277|2|Wireless, LLC (Northstar) on October 27, 2015, subject to the following condition on any assignment or transfer of the authorization, in whole or in part, that will be applicable to any subsequent holder of this authorization:  
+Any assignee or transfer||
+SF|3748270|||WQWQ704|P|11897277|3|ee of all or part of the market and spectrum initially authorized to Northstar Wireless, LLC (�Northstar�) on October 27, 2015, will be jointly and severally liable with Northstar to make a payment of a proportional share (�Proportional Share�) of any amo||
+SF|3748270|||WQWQ704|P|11897277|4|unt or amounts that may be required to be paid pursuant to 47 C.F.R. �1.2104(g)(2)(i) (the �Deficiency Payment�) in respect of those winning bids defaulted on by Northstar on October 1, 2015, which bids are listed on Attachment 1 to this Special Condition||
+SF|3748270|||WQWQ704|P|11897277|5|.  The Proportional Share applicable to this authorization shall be equal to the total amount of the Deficiency Payment, multiplied by a fraction, the numerator of which is the winning bid amount in Auction 97 for this authorization as identified on Attac||
+SF|3748270|||WQWQ704|P|11897277|6|hment 2 to this Special Condition, and the denominator of which is $5,618,930,400.  If the Proportional Share is not timely paid, such assignee�s or transferee�s authorization SHALL AUTOMATICALLY TERMINATE without specific Commission action on the date th||
+SF|3748270|||WQWQ704|P|11897277|7|at the licensee fails to timely make any such payment in response to a demand letter from the Commission.||
+SF|3748318|||WQWQ752|P|11897325|1|In accordance with the Commission�s MO&O, FCC 15-104 (rel. Aug. 18, 2015), and subject to WTB Letter to Northstar, DA 15-1108 (rel. Oct. 1, 2015), a copy of which is attached to this authorization in ULS, this authorization is granted in part to Northstar||
+SF|3748318|||WQWQ752|P|11897325|2|Wireless, LLC (Northstar) on October 27, 2015, subject to the following condition on any assignment or transfer of the authorization, in whole or in part, that will be applicable to any subsequent holder of this authorization:  
+Any assignee or transfer||
+SF|3748318|||WQWQ752|P|11897325|3|ee of all or part of the market and spectrum initially authorized to Northstar Wireless, LLC (�Northstar�) on October 27, 2015, will be jointly and severally liable with Northstar to make a payment of a proportional share (�Proportional Share�) of any amo||
+SF|3748318|||WQWQ752|P|11897325|4|unt or amounts that may be required to be paid pursuant to 47 C.F.R. �1.2104(g)(2)(i) (the �Deficiency Payment�) in respect of those winning bids defaulted on by Northstar on October 1, 2015, which bids are listed on Attachment 1 to this Special Condition||
+SF|3748318|||WQWQ752|P|11897325|5|.  The Proportional Share applicable to this authorization shall be equal to the total amount of the Deficiency Payment, multiplied by a fraction, the numerator of which is the winning bid amount in Auction 97 for this authorization as identified on Attac||
+SF|3748318|||WQWQ752|P|11897325|6|hment 2 to this Special Condition, and the denominator of which is $5,618,930,400.  If the Proportional Share is not timely paid, such assignee�s or transferee�s authorization SHALL AUTOMATICALLY TERMINATE without specific Commission action on the date th||
+SF|3748318|||WQWQ752|P|11897325|7|at the licensee fails to timely make any such payment in response to a demand letter from the Commission.||
+SF|3748521|||WQWQ955|P|11897529|1|In accordance with the Commission�s MO&O, FCC 15-104 (rel. Aug. 18, 2015), and subject to WTB Letter to SNR, DA 15-1109 (rel. Oct. 1, 2015), a copy of which is attached to this authorization in ULS, this authorization is granted in part to SNR Wireless Li||
+SF|3748521|||WQWQ955|P|11897529|2|censeCo, LLC (SNR) on October 27, 2015, subject to the following condition on any assignment or transfer of the authorization, in whole or in part, that will be applicable to any subsequent holder of this authorization:  
+Any assignee or transferee of al||
+SF|3748521|||WQWQ955|P|11897529|3|l or part of the market and spectrum initially authorized to SNR Wireless LicenseCo, LLC (�SNR�) on October 27, 2015, will be jointly and severally liable with SNR to make a payment of a proportional share (�Proportional Share�) of any amount or amounts t||
+SF|3748521|||WQWQ955|P|11897529|4|hat may be required to be paid pursuant to 47 C.F.R. �1.2104(g)(2)(i) (the �Deficiency Payment�) in respect of those winning bids defaulted on by SNR on October 1, 2015, which bids are listed on Attachment 1 to this Special Condition.  The Proportional Sh||
+SF|3748521|||WQWQ955|P|11897529|5|are applicable to this authorization shall be equal to the total amount of the Deficiency Payment, multiplied by a fraction, the numerator of which is the winning bid amount in Auction 97 for this authorization as identified on Attachment 2 to this Specia||
+SF|3748521|||WQWQ955|P|11897529|6|l Condition, and the denominator of which is $4,271,458,700.  If the Proportional Share is not timely paid, such assignee�s or transferee�s authorization SHALL AUTOMATICALLY TERMINATE without specific Commission action on the date that the licensee fails||
+SF|3748521|||WQWQ955|P|11897529|7|to timely make any such payment in response to a demand letter from the Commission.||
+LA|3748270|WQWQ704|O|Northstar Special Condition Attachment 2|10/27/2015||A
+LA|3748270|WQWQ704|O|Northstar Special Condition Attachment 1|10/27/2015||A
+LA|3748270|WQWQ704|L|WTB Letter to Northstar, DA 15-1108|10/27/2015||A
+LA|3748318|WQWQ752|O|Northstar Special Condition Attachment 2|10/27/2015||A
+LA|3748318|WQWQ752|O|Northstar Special Condition Attachment 1|10/27/2015||A
+LA|3748318|WQWQ752|L|WTB Letter to Northstar, DA 15-1108|10/27/2015||A
+LA|3748521|WQWQ955|L|WTB Letter SNR, DA 15-1109|10/27/2015||D
+LA|3748521|WQWQ955|O|SNR Special condition Attachment 1|10/27/2015||D
+LA|3748521|WQWQ955|O|SNR Special Condition Attachment 2|10/27/2015||D
+LA|3748521|WQWQ955|O|SNR Special Condition Attachment 2|10/27/2015||A
+LA|3748521|WQWQ955|O|SNR Special ConditionAttachment 1|10/27/2015||A
+LA|3748521|WQWQ955|L|WTB Letter to SNR, DA 15-1109|10/27/2015||A
+BO|3688278|WQVN846|31|04/08/2021||||
+BO|3688278|WQVN846|32|04/08/2027||||
+BO|3688279|WQVN847|31|04/08/2021||||
+BO|3688279|WQVN847|32|04/08/2027||||
+BO|3688443|WQVP211|31|04/08/2021||||
+BO|3688443|WQVP211|32|04/08/2027||||
+BO|3748270|WQWQ704|31|10/27/2021||||
+BO|3748270|WQWQ704|32|10/27/2027||||
+BO|3748318|WQWQ752|31|10/27/2021||||
+BO|3748318|WQWQ752|32|10/27/2027||||
+BO|3748521|WQWQ955|31|10/27/2021||||
+BO|3748521|WQWQ955|32|10/27/2027||||
