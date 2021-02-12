@@ -1,0 +1,11 @@
+record_type|unique_system_identifier|uls_file_number|call_sign|ebf_number|location_action_performed|location_type_code|location_class_code|location_number|site_status|corresponding_fixed_location|location_address|location_city|location_county|location_state|radius_of_operation|area_of_operation_code|clearance_indicator|ground_elevation|lat_degrees|lat_minutes|lat_seconds|lat_direction|long_degrees|long_minutes|long_seconds|long_direction|max_lat_degrees|max_lat_minutes|max_lat_seconds|max_lat_direction|max_long_degrees|max_long_minutes|max_long_seconds|max_long_direction|nepa|quiet_zone_notification_date|tower_registration_number|height_of_support_structure|overall_height_of_structure|structure_type|airport_id|location_name|units_hand_held|units_mobile|units_temp_fixed|units_aircraft|units_itinerant|status_code|status_date|earth_agree
+LO|3319218|||WQOG703||F|R|17||||||||||1621.0|40|1|7.8|N|105|15|45.3|W||||||||||||||||1844FOLSOMST||||||||
+LO|3319218|||WQOG703||F|R|18||||||||||1516.4|40|12|49.8|N|104|58|31.6|W||||||||||||||||4051CAMELOTC||||||||
+LO|3319218|||WQOG703||F|R|19||||||||||1508.2|40|6|49.7|N|104|58|18.6|W||||||||||||||||7300MILLERPL||||||||
+LO|3319218|||WQOG703||F|R|20||||||||||1483.6|40|8|59.1|N|104|58|41.6|W||||||||||||||||10258EI25FRO||||||||
+LO|3319218|||WQOG703||F|R|21||||||||||1586.2|40|3|52.1|N|105|12|22.4|W||||||||||||||||4946N63RDSTB||||||||
+LO|3319218|||WQOG703||F|R|13||||||||||1537.0|40|11|51.1|N|105|6|6.8|W||||||||||||||||2142NMAINSTL||||||||
+LO|3319218|||WQOG703||F|R|14||||||||||1601.2|40|0|54.7|N|105|13|32.8|W||||||||||||||||5495ARAPAHOE||||||||
+LO|3319218|||WQOG703||F|R|15||||||||||1535.3|40|9|4.3|N|105|9|14.4|W||||||||||||||||600SAIRPORTR||||||||
+LO|3319218|||WQOG703||F|R|8||||||||||1605.2|40|0|56.8|N|105|14|38.0|W||||||||||||||||168038THST||||||||
+LO|3319218|||WQOG703||F|R|9||||||||||1568.9|40|5|23.8|N|105|10|40.0|W||||||||||||||||6309 MONARCH||||||||
