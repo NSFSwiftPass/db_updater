@@ -1,3 +1,6 @@
 .env
+.idea
 
 db_updater/database/db_classes.py
+
+
