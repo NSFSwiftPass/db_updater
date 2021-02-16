@@ -18,9 +18,11 @@
 ## Config Variables
 Ask another developer for these values
 
+- DB_NAME
 - DB_PASSWORD
 - DB_URL
 - DB_USERNAME
+- SCHEMA_NAME
 
 ## Getting a DB User Account
 1. Create login for new user
