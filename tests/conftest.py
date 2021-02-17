@@ -2,7 +2,7 @@ from shutil import rmtree
 
 from pytest import fixture
 
-from db_updater.uls_data_retriever import UlsDataRetriever
+from db_updater.importers.uls_data_retriever import UlsDataRetriever
 
 
 @fixture

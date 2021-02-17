@@ -2,7 +2,7 @@ import uuid
 from os.path import isdir, isfile
 from shutil import rmtree
 
-from db_updater.uls_data_retriever import UlsDataRetriever
+from db_updater.importers.uls_data_retriever import UlsDataRetriever
 
 
 def _get_first_filename(retriever: UlsDataRetriever) -> str:

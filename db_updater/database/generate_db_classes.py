@@ -1,6 +1,6 @@
 import os
 
-from db_updater.connection import DB_NAME, DB_PASSWORD, DB_URL, DB_USERNAME, SCHEMA_NAME
+from db_updater.database.connection import DB_NAME, DB_PASSWORD, DB_URL, DB_USERNAME, SCHEMA_NAME
 
 OUTPUT_FILEPATH = os.path.join('db_updater', 'database', 'db_classes.py')
 

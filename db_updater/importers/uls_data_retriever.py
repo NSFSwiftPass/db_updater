@@ -1,12 +1,13 @@
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 from ftplib import FTP
 from os import path
 from pathlib import Path
 from shutil import unpack_archive
 from typing import Generator
 
-from db_updater.data_importer import DATA_FILES_DIRECTORY, DataImporter
+from db_updater.importers.data_importer import DATA_FILES_DIRECTORY, DataImporter
+from db_updater.utils import ULS_TIMEZONE, get_today_uls
 
 
 class UlsDataRetriever:
@@ -21,19 +22,36 @@ class UlsDataRetriever:
                  directory_path: str = DATA_FILES_DIRECTORY,
                  generate_db_classes: bool = False,
                  process_files_after_datetime: datetime = None):
+        """
+
+        :param complete: If true, this will import the Sunday complete data files from ULS
+        :param delete_all_current_entries: Deletes all data in the database
+        :param directory_path: The directory to house the downloaded data
+        :param generate_db_classes: Generate the Python ORM classes to manipulate the database
+        :param process_files_after_datetime: Date threshold after which to retrieve data
+        """
         self.data_importer = DataImporter(generate_db_classes=generate_db_classes,
                                           delete_all_current_entries=delete_all_current_entries,
                                           directory_path=self._make_unique_downloads_folder(directory_path=directory_path))
-        today = datetime.now()
-        self.process_files_after_datetime = process_files_after_datetime or datetime(year=today.year, month=today.month, day=today.day)
+
+        self.process_files_after_datetime = process_files_after_datetime or get_today_uls() - timedelta(days=1)
 
         self.ftp = FTP(self.ULS_FTP_HOST)
         self.ftp.login()
         self.ftp.cwd(f'{self.DATA_ROOT_DIR}/{self.DATA_COMPLETE_DIR if complete else self.DATA_DAILY_DIR}')
 
     def perform_import_from_uls(self) -> None:
-        self._download_from_uls()
-        self.data_importer.import_from_directory()
+        """
+        This downloads and imports files one at a time. If downloaded and unpacked all at once, unpacked files with
+        the same name will overwrite each other.
+        """
+        for filename in self._files_after_date():
+            filepath = self._download_zip(filename=filename)
+            unpack_archive(filepath, path.join(self.data_importer.directory_path))
+
+            self.data_importer.import_from_directory()
+
+            [f.unlink() for f in Path(self.data_importer.directory_path).glob("*") if f.is_file()]
 
     def _download_from_uls(self) -> None:
         for filename in self._files_after_date():
@@ -58,14 +76,10 @@ class UlsDataRetriever:
         month = int(date_str[4:6])
         day = int(date_str[6:8])
 
-        return datetime(year=year, month=month, day=day)
+        return ULS_TIMEZONE.localize(datetime(year=year, month=month, day=day))
 
     @staticmethod
     def _make_unique_downloads_folder(directory_path: str) -> str:
         unique_filepath = path.join(directory_path, f'{datetime.now().isoformat()}_{uuid.uuid4().hex}')
         Path(unique_filepath).mkdir(parents=True, exist_ok=True)
         return unique_filepath
-
-
-if __name__ == '__main__':
-    UlsDataRetriever(complete=True, )

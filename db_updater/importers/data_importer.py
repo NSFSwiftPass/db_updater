@@ -7,7 +7,7 @@ from typing import Any, Dict, Generator, List, Optional
 from sqlalchemy import Table
 from sqlalchemy.sql import Insert
 
-from db_updater.connection import Base, Session, engine
+from db_updater.database.connection import Base, Session, engine
 from db_updater.database import db_classes
 from db_updater.database.generate_db_classes import generate_db_classes_file
 
@@ -21,9 +21,11 @@ class DataImporter:
     def __init__(self,
                  delete_all_current_entries: bool = False,
                  directory_path: str = DATA_FILES_DIRECTORY,
+                 file_extension: str = 'dat',
                  generate_db_classes: bool = False):
         self.generate_db_classes = generate_db_classes
         self.delete_all_current_entries = delete_all_current_entries
+        self.file_extension = file_extension
         self.directory_path = directory_path
 
         Base.metadata.create_all(engine)
@@ -80,7 +82,7 @@ class DataImporter:
         return table.insert().values(**insert_values)
 
     def _get_entry_lines_from_directory(self) -> Generator[str, None, None]:
-        for filepath in Path(self.directory_path).glob('*.txt'):
+        for filepath in Path(self.directory_path).glob(f'*.{self.file_extension}'):
             with open(filepath, "r") as file:
                 for line in file.readlines():
                     yield line.rstrip()
@@ -99,7 +101,3 @@ class DataImporter:
 
         if self.delete_all_current_entries:
             self._delete_all_current_entries()
-
-
-if __name__ == '__main__':
-    DataImporter().import_from_directory()
