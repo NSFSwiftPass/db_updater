@@ -19,9 +19,9 @@ class DataImporter:
     directory_path: str
 
     def __init__(self,
-                 generate_db_classes: bool = True,
-                 delete_all_current_entries: bool = True,
-                 directory_path: str = DATA_FILES_DIRECTORY):
+                 delete_all_current_entries: bool = False,
+                 directory_path: str = DATA_FILES_DIRECTORY,
+                 generate_db_classes: bool = False):
         self.generate_db_classes = generate_db_classes
         self.delete_all_current_entries = delete_all_current_entries
         self.directory_path = directory_path
