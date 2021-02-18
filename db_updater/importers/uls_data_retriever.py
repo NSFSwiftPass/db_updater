@@ -1,15 +1,24 @@
+import logging
 import uuid
 from datetime import datetime
-from ftplib import FTP
-from os import path
+from ftplib import FTP, error_temp
+from os import getenv, path
 from pathlib import Path
 from re import match
 from shutil import unpack_archive
 from typing import Generator, List
 
+from retry import retry
+
 from db_updater.database.connection import Session
 from db_updater.importers.data_importer import DATA_FILES_DIRECTORY, DataImporter
-from db_updater.utils import ULS_TIMEZONE, get_today_uls
+from db_updater.utils import ULS_TIMEZONE
+
+LOG_LEVEL = getenv('LOG_LEVEL')
+
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel(getattr(logging, LOG_LEVEL) if LOG_LEVEL else logging.INFO)
 
 
 class UlsDataRetriever:
@@ -32,18 +41,17 @@ class UlsDataRetriever:
             otherwise the Sunday complete data files from ULS
         :param directory_path: The directory to house the downloaded data
         """
+        self.is_daily = is_daily
         self.session = session or Session()
 
-        self.data_importer = DataImporter(delete_all_current_entries=not is_daily,
+        self.data_importer = DataImporter(delete_all_current_entries=not self.is_daily,
                                           directory_path=self._make_unique_downloads_folder(directory_path=directory_path),
                                           session=self.session)
 
         self.datetime_from = datetime_from
         self.datetime_to = datetime_to
 
-        self.ftp = FTP(self.ULS_FTP_HOST)
-        self.ftp.login()
-        self.ftp.cwd(f'{self.DATA_ROOT_DIR}/{self.DATA_DAILY_DIR if is_daily else self.DATA_COMPLETE_DIR}')
+        self.ftp = self._connect_ftp()
 
     def perform_import_from_uls(self) -> None:
         """
@@ -51,14 +59,27 @@ class UlsDataRetriever:
         the same name will overwrite each other.
         """
         for filename in self._licence_files_after_date():
+            logger.debug(f'{datetime.now()}: Downloading {filename}')
             filepath = self._download_zip(filename=filename)
+
+            logger.debug(f'{datetime.now()}: Unpacking {filepath}')
             unpack_archive(filepath, path.join(self.data_importer.directory_path))
 
+            logger.debug(f'{datetime.now()}: Importing...')
             self.data_importer.import_from_directory()
+            logger.debug(f'{datetime.now()}: Imported.')
+
+            self._reconnect_ftp_if_timeout()
 
             [f.unlink() for f in Path(self.data_importer.directory_path).glob("*") if f.is_file()]
 
         self.session.commit()
+
+    def _connect_ftp(self) -> FTP:
+        ftp = FTP(self.ULS_FTP_HOST)
+        ftp.login()
+        ftp.cwd(f'{self.DATA_ROOT_DIR}/{self.DATA_DAILY_DIR if self.is_daily else self.DATA_COMPLETE_DIR}')
+        return ftp
 
     def _download_from_uls(self) -> None:
         for filename in self._licence_files_after_date():
@@ -94,3 +115,14 @@ class UlsDataRetriever:
         unique_filepath = path.join(directory_path, f'{datetime.now().isoformat()}_{uuid.uuid4().hex}')
         Path(unique_filepath).mkdir(parents=True, exist_ok=True)
         return unique_filepath
+
+    def _reconnect_ftp_if_timeout(self):
+        @retry(error_temp, tries=3, delay=1)
+        def check_connection():
+            try:
+                self.ftp.nlst()
+            except error_temp as e:
+                self.ftp = self._connect_ftp()
+                raise e
+
+        check_connection()
