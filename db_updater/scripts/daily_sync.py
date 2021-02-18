@@ -31,11 +31,13 @@ class DailySync:
         self.is_daily = get_today_uls().weekday() != SUNDAY
         self.current_run_timestamp = get_now_utc()
         self.session = Session()
+        self.date_to = get_now_uls()
 
         if self.is_daily:
             last_script_info = self._get_last_script_info()
             self.date_from = last_script_info.date_to if last_script_info else three_days_ago
-            self.date_to = get_now_uls()
+        else:
+            self.date_from = get_today_uls()
 
         self.retriever = UlsDataRetriever(datetime_from=self.date_from,
                                           datetime_to=self.date_to,
