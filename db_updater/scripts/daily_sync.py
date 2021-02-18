@@ -1,3 +1,4 @@
+import uuid
 from calendar import SUNDAY
 from datetime import datetime, timedelta
 from shutil import rmtree
@@ -25,26 +26,27 @@ class DailySync:
     this_script_info: ScriptInfo = None
 
     def __init__(self):
-        yesterday = get_now_uls() - timedelta(days=1)
+        three_days_ago = get_now_uls() - timedelta(days=3)
 
         self.is_daily = get_today_uls().weekday() != SUNDAY
         self.current_run_timestamp = get_now_utc()
         self.session = Session()
+
+        if self.is_daily:
+            last_script_info = self._get_last_script_info()
+            self.date_from = last_script_info.date_to if last_script_info else three_days_ago
+            self.date_to = get_now_uls()
+
         self.retriever = UlsDataRetriever(datetime_from=self.date_from,
                                           datetime_to=self.date_to,
                                           is_daily=self.is_daily,
                                           session=self.session)
 
-        if self.is_daily:
-            last_script_info = self._get_last_script_info()
-            self.date_from = last_script_info.date_to if last_script_info else yesterday
-            self.date_to = get_now_uls()
-
     def begin(self) -> None:
+        self._assert_none_running()
         self._create_script_info_entry()
 
         try:
-            self._assert_none_running()
             self.retriever.perform_import_from_uls()
             rmtree(self.retriever.data_importer.directory_path, ignore_errors=True)
             self._update_script_info_success()
@@ -63,7 +65,8 @@ class DailySync:
             raise AssertionError('There is already a sync in progress.')
 
     def _create_script_info_entry(self) -> None:
-        self.this_script_info = ScriptInfo(script_name=self.SCRIPT_NAME,
+        self.this_script_info = ScriptInfo(id=uuid.uuid4().hex,
+                                           script_name=self.SCRIPT_NAME,
                                            status=DailySyncStatuses.begin,
                                            date_from=self.date_from,
                                            date_to=self.date_to,

@@ -1,3 +1,4 @@
+import uuid
 from calendar import MONDAY, SUNDAY
 from datetime import timedelta
 from functools import partial
@@ -42,7 +43,8 @@ def test_get_last_script_info(daily_sync: DailySync):
 
     session = daily_sync.session
     for index, timestamp in enumerate(localized_timestamps):
-        script_info = ScriptInfo(script_name=daily_sync.SCRIPT_NAME,
+        script_info = ScriptInfo(id=uuid.uuid4().hex,
+                                 script_name=daily_sync.SCRIPT_NAME,
                                  status=DailySyncStatuses.success if index else DailySyncStatuses.error,
                                  timestamp=timestamp)
         session.add(script_info)
