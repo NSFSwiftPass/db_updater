@@ -16,3 +16,4 @@ class ScriptInfo(Base):
     date_to = Column(DateTime(True))
     timestamp = Column(DateTime(True), primary_key=True, nullable=False)
     error_message = Column(String)
+    last_updated = Column(DateTime(True))

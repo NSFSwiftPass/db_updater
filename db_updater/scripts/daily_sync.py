@@ -7,7 +7,7 @@ from db_updater.database.classes.script_info_classes import ScriptInfo
 
 from db_updater.database.connection import Session
 from db_updater.importers.uls_data_retriever import UlsDataRetriever
-from db_updater.utils import get_now_uls, get_today_uls
+from db_updater.utils import get_now_uls, get_now_utc, get_today_uls
 
 
 class DailySyncStatuses:
@@ -28,7 +28,7 @@ class DailySync:
         yesterday = get_now_uls() - timedelta(days=1)
 
         self.is_daily = get_today_uls().weekday() != SUNDAY
-        self.current_run_timestamp = datetime.utcnow()
+        self.current_run_timestamp = get_now_utc()
         self.session = Session()
         self.retriever = UlsDataRetriever(datetime_from=self.date_from,
                                           datetime_to=self.date_to,
@@ -67,6 +67,7 @@ class DailySync:
                                            status=DailySyncStatuses.begin,
                                            date_from=self.date_from,
                                            date_to=self.date_to,
+                                           last_updated=self.current_run_timestamp,
                                            timestamp=self.current_run_timestamp)
         self.session.add(self.this_script_info)
         self.session.commit()
@@ -82,10 +83,14 @@ class DailySync:
                                 datetime_to=self.date_to,
                                 is_daily=self.is_daily)
 
+    def _set_last_updated(self) -> None:
+        self.this_script_info.last_updated = get_now_utc()
+
     def _update_script_info_success(self) -> None:
         self._assert_initial_script_info_entry()
 
         self.this_script_info.status = DailySyncStatuses.success
+        self._set_last_updated()
         self.session.commit()
 
     def _update_script_info_error(self, error_message: str) -> None:
@@ -93,6 +98,7 @@ class DailySync:
 
         self.this_script_info.status = DailySyncStatuses.error
         self.this_script_info.error_message = error_message
+        self._set_last_updated()
         self.session.commit()
 
 

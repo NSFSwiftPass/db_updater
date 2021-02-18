@@ -1,5 +1,5 @@
 from calendar import MONDAY, SUNDAY
-from datetime import datetime, timedelta
+from datetime import timedelta
 from functools import partial
 from typing import Callable
 
@@ -8,7 +8,7 @@ from pytest_mock import MockerFixture
 from db_updater import utils
 from db_updater.database.classes.script_info_classes import ScriptInfo
 from db_updater.scripts.daily_sync import DailySync, DailySyncStatuses
-from db_updater.utils import ULS_TIMEZONE
+from db_updater.utils import get_now_uls
 
 
 def test_assert_none_running(daily_sync: DailySync):
@@ -29,12 +29,16 @@ def test_create_script_info_entry(daily_sync: DailySync):
         .query(ScriptInfo)\
         .filter(ScriptInfo.script_name == daily_sync.SCRIPT_NAME)
     assert new_entry_query.count() == 1, 'It should have created a new script info entry.'
-    assert new_entry_query.first().status == DailySyncStatuses.begin, 'It should have set the status to begin.'
+
+    refreshed_entry = new_entry_query.first()
+    assert refreshed_entry.status == DailySyncStatuses.begin, 'It should have set the status to begin.'
+
+    assert refreshed_entry.last_updated == daily_sync.current_run_timestamp, \
+        'It should have initialized the `last_updated` time.'
 
 
 def test_get_last_script_info(daily_sync: DailySync):
-    timestamps = (datetime.now() - timedelta(days=i) for i in range(3))
-    localized_timestamps = [ULS_TIMEZONE.localize(timestamp)for timestamp in timestamps]
+    localized_timestamps = [get_now_uls() - timedelta(days=i) for i in range(3)]
 
     session = daily_sync.session
     for index, timestamp in enumerate(localized_timestamps):
@@ -91,8 +95,11 @@ def test_update_script_info_success(daily_sync: DailySync):
     daily_sync._create_script_info_entry()
     daily_sync._update_script_info_success()
 
-    assert daily_sync._get_last_script_info().status == DailySyncStatuses.success, \
+    refreshed_entry = daily_sync._get_last_script_info()
+    assert refreshed_entry.status == DailySyncStatuses.success, \
         'It should have updated the status successful.'
+
+    _assert_last_updated_greater_than(daily_sync=daily_sync, refreshed_entry=refreshed_entry)
 
 
 def test_update_script_info_error(daily_sync: DailySync):
@@ -106,6 +113,8 @@ def test_update_script_info_error(daily_sync: DailySync):
 
     assert refreshed_entry.error_message == error_message, \
         'It should have updated the status to have an error message.'
+
+    _assert_last_updated_greater_than(daily_sync=daily_sync, refreshed_entry=refreshed_entry)
 
 
 def test_update_script_info_success_no_initial(daily_sync: DailySync):
@@ -123,3 +132,8 @@ def _assert_update_script_infos_no_initial(func: Callable[[], None]):
         assert False, 'It should not have attempted to update the entry with no initial entry.'
     except AssertionError as e:
         pass
+
+
+def _assert_last_updated_greater_than(daily_sync: DailySync, refreshed_entry: ScriptInfo):
+    assert refreshed_entry.last_updated > daily_sync.current_run_timestamp, \
+        'It should have updated `last_updated` time.'
