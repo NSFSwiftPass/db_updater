@@ -12,7 +12,7 @@
    1. Refer to the "Config Variables" section of this document.
 1. Run importer script
    ```bash
-   python3 db_updater/data_importer.py
+   python3 db_updater/scripts/daily_sync.py
    ```
 
 ## Config Variables
@@ -22,6 +22,7 @@ Ask another developer for these values
 - DB_PASSWORD
 - DB_URL
 - DB_USERNAME
+- LOG_LEVEL
 - SCHEMA_NAME
 
 ## Getting a DB User Account

@@ -12,7 +12,7 @@ t_PUBACC_AN = Table(
     Column('ebf_number', String(30)),
     Column('call_sign', CHAR(10)),
     Column('antenna_action_performed', CHAR(1)),
-    Column('antenna_number', Integer, nullable=False),
+    Column('antenna_number', Integer),
     Column('location_number', Integer),
     Column('receive_zone_code', CHAR(6)),
     Column('antenna_type_code', CHAR(1)),
