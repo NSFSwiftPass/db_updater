@@ -40,14 +40,11 @@ class DailySync:
             self.date_from = last_script_info.date_to if last_script_info else yesterday
             self.date_to = get_now_uls()
 
-    def _assert_initial_script_info_entry(self):
-        if not self.this_script_info:
-            raise AssertionError('Initial script info entry has not been created.')
-
     def begin(self) -> None:
         self._create_script_info_entry()
 
         try:
+            self._assert_none_running()
             self.retriever.perform_import_from_uls()
             rmtree(self.retriever.data_importer.directory_path, ignore_errors=True)
             self._update_script_info_success()
@@ -55,6 +52,15 @@ class DailySync:
             self._update_script_info_error(error_message=str(e))
         finally:
             self.session.close()
+
+    def _assert_initial_script_info_entry(self) -> None:
+        if not self.this_script_info:
+            raise AssertionError('Initial script info entry has not been created.')
+
+    def _assert_none_running(self) -> None:
+        if self.session.query(ScriptInfo).filter(ScriptInfo.script_name == self.SCRIPT_NAME,
+                                                 ScriptInfo.status == DailySyncStatuses.begin).count():
+            raise AssertionError('There is already a sync in progress.')
 
     def _create_script_info_entry(self) -> None:
         self.this_script_info = ScriptInfo(script_name=self.SCRIPT_NAME,

@@ -11,6 +11,17 @@ from db_updater.scripts.daily_sync import DailySync, DailySyncStatuses
 from db_updater.utils import ULS_TIMEZONE
 
 
+def test_assert_none_running(daily_sync: DailySync):
+    assert daily_sync._assert_none_running() is None, 'It should not have asserted that there was a script in progress.'
+
+    daily_sync._create_script_info_entry()
+    try:
+        daily_sync._assert_none_running()
+        assert False, 'It should have asserted that there was a script in progress.'
+    except AssertionError as e:
+        pass
+
+
 def test_create_script_info_entry(daily_sync: DailySync):
     daily_sync._create_script_info_entry()
 
