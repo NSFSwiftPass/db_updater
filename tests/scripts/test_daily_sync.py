@@ -9,7 +9,7 @@ from pytest_mock import MockerFixture
 from db_updater import utils
 from db_updater.database.classes.script_info_classes import ScriptInfo
 from db_updater.scripts.daily_sync import DailySync, DailySyncStatuses
-from db_updater.utils import get_now_uls
+from db_updater.utils import get_now_uls, get_today_uls
 
 
 def test_assert_none_running(daily_sync: DailySync):
@@ -68,6 +68,7 @@ def test_get_last_script_info_none(daily_sync: DailySync):
 def test_init():
     daily_sync = DailySync()
     assert daily_sync.current_run_timestamp, 'It should have created a current run timestamp.'
+    assert daily_sync.date_to, 'It should have created a `date_to` timestamp.'
     assert daily_sync.retriever, 'It should have created a ULS data retriever.'
     assert daily_sync.session, 'It should have created a session.'
 
@@ -78,8 +79,7 @@ def test_init_sunday(mocker: MockerFixture):
 
     daily_sync = DailySync()
     assert not daily_sync.is_daily, 'It should have set this to be a weekly run.'
-    assert daily_sync.date_from is None, 'It should not have set the date from.'
-    assert daily_sync.date_to is None, 'It should not have set the date to.'
+    assert daily_sync.date_from == get_today_uls(), 'It should have set the date to the beginning of today.'
 
 
 def test_init_other_day(mocker: MockerFixture):
