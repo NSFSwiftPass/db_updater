@@ -7,6 +7,7 @@ from re import match
 from shutil import unpack_archive
 from typing import Generator, List
 
+from db_updater.database.connection import Session
 from db_updater.importers.data_importer import DATA_FILES_DIRECTORY, DataImporter
 from db_updater.utils import ULS_TIMEZONE, get_today_uls
 
@@ -22,7 +23,7 @@ class UlsDataRetriever:
                  datetime_to: datetime,
                  is_daily: bool,
                  directory_path: str = DATA_FILES_DIRECTORY,
-                 generate_db_classes: bool = False):
+                 session: Session = None):
         """
 
         :param datetime_from: Date threshold after which to retrieve data
@@ -30,11 +31,12 @@ class UlsDataRetriever:
         :param is_daily: If true, this will import the daily data file from ULS, and
             otherwise the Sunday complete data files from ULS
         :param directory_path: The directory to house the downloaded data
-        :param generate_db_classes: Generate the Python ORM classes to manipulate the database
         """
-        self.data_importer = DataImporter(generate_db_classes=generate_db_classes,
-                                          delete_all_current_entries=not is_daily,
-                                          directory_path=self._make_unique_downloads_folder(directory_path=directory_path))
+        self.session = session or Session()
+
+        self.data_importer = DataImporter(delete_all_current_entries=not is_daily,
+                                          directory_path=self._make_unique_downloads_folder(directory_path=directory_path),
+                                          session=self.session)
 
         self.datetime_from = datetime_from
         self.datetime_to = datetime_to
@@ -55,6 +57,8 @@ class UlsDataRetriever:
             self.data_importer.import_from_directory()
 
             [f.unlink() for f in Path(self.data_importer.directory_path).glob("*") if f.is_file()]
+
+        self.session.commit()
 
     def _download_from_uls(self) -> None:
         for filename in self._licence_files_after_date():

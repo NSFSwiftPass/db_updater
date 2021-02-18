@@ -30,6 +30,10 @@ class DailySync:
         self.is_daily = get_today_uls().weekday() != SUNDAY
         self.current_run_timestamp = datetime.utcnow()
         self.session = Session()
+        self.retriever = UlsDataRetriever(datetime_from=self.date_from,
+                                          datetime_to=self.date_to,
+                                          is_daily=self.is_daily,
+                                          session=self.session)
 
         if self.is_daily:
             last_script_info = self._get_last_script_info()
@@ -44,16 +48,13 @@ class DailySync:
         self._create_script_info_entry()
 
         try:
-            retriever = UlsDataRetriever(datetime_from=self.date_from,
-                                         datetime_to=self.date_to,
-                                         is_daily=self.is_daily)
-            retriever.perform_import_from_uls()
-
-            rmtree(retriever.data_importer.directory_path, ignore_errors=True)
-
+            self.retriever.perform_import_from_uls()
+            rmtree(self.retriever.data_importer.directory_path, ignore_errors=True)
             self._update_script_info_success()
         except Exception as e:
             self._update_script_info_error(error_message=str(e))
+        finally:
+            self.session.close()
 
     def _create_script_info_entry(self) -> None:
         self.this_script_info = ScriptInfo(script_name=self.SCRIPT_NAME,
@@ -66,7 +67,7 @@ class DailySync:
 
     def _get_last_script_info(self) -> Optional[ScriptInfo]:
         return self.session.query(ScriptInfo)\
-            .filter(ScriptInfo.script_name == self.SCRIPT_NAME)\
+            .filter(ScriptInfo.script_name == self.SCRIPT_NAME, ScriptInfo.status == DailySyncStatuses.success)\
             .order_by(ScriptInfo.timestamp.desc())\
             .first()
 

@@ -9,31 +9,27 @@ from sqlalchemy.sql import Insert
 
 from db_updater.database.classes import dds_users_classes
 from db_updater.database.connection import Session
-from db_updater.database.generate_db_classes import generate_db_classes_file
 
 DATA_FILES_DIRECTORY = os.path.join('db_updater', 'database', 'downloaded_data')
 TABLE_VARIABLE_NAME_PREFIX = 't_PUBACC_'
 
 
 class DataImporter:
-    directory_path: str
-
     def __init__(self,
                  delete_all_current_entries: bool = False,
                  directory_path: str = DATA_FILES_DIRECTORY,
                  file_extension: str = 'dat',
-                 generate_db_classes: bool = False):
-        self.generate_db_classes = generate_db_classes
+                 session: Session = None):
         self.delete_all_current_entries = delete_all_current_entries
         self.file_extension = file_extension
         self.directory_path = directory_path
 
-        self.session = Session()
+        self.session = session or Session()
 
     def import_from_directory(self):
-        self._setup()
+        if self.delete_all_current_entries:
+            self._delete_all_current_entries()
         self._read_and_import_lines()
-        self.session.close()
 
     def _convert_entry_values_to_python(self, entry_values: List[str]) -> Dict[str, Any]:
         table = self._find_matching_table(entry_values=entry_values)
@@ -51,10 +47,6 @@ class DataImporter:
 
         return {key: value_mapper(key, value) for key, value in zip(headers, entry_values)}
 
-    @staticmethod
-    def _generate_cb_classes():
-        generate_db_classes_file()
-
     def _delete_all_current_entries(self):
         all_tables = [value for variable_name, value in dds_users_classes.__dict__.items() if
                       re.match(f'^{TABLE_VARIABLE_NAME_PREFIX}[A-Z]{{2}}', variable_name)]
@@ -63,7 +55,7 @@ class DataImporter:
             delete_clause = table.delete()
             self.session.execute(delete_clause)
 
-        self.session.commit()
+        self.session.flush()
 
     @staticmethod
     def _find_matching_table(entry_values: List[str]) -> Optional[Table]:
@@ -91,11 +83,4 @@ class DataImporter:
             if insert_clause is not None:
                 self.session.execute(insert_clause)
 
-        self.session.commit()
-
-    def _setup(self):
-        if self.generate_db_classes:
-            self._generate_cb_classes()
-
-        if self.delete_all_current_entries:
-            self._delete_all_current_entries()
+        self.session.flush()

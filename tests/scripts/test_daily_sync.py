@@ -22,13 +22,13 @@ def test_create_script_info_entry(daily_sync: DailySync):
 
 
 def test_get_last_script_info(daily_sync: DailySync):
-    timestamps = (datetime.now() - timedelta(days=i) for i in range(2))
+    timestamps = (datetime.now() - timedelta(days=i) for i in range(3))
     localized_timestamps = [ULS_TIMEZONE.localize(timestamp)for timestamp in timestamps]
 
     session = daily_sync.session
-    for timestamp in localized_timestamps:
+    for index, timestamp in enumerate(localized_timestamps):
         script_info = ScriptInfo(script_name=daily_sync.SCRIPT_NAME,
-                                 status='complete',
+                                 status=DailySyncStatuses.success if index else DailySyncStatuses.error,
                                  timestamp=timestamp)
         session.add(script_info)
 
@@ -41,17 +41,18 @@ def test_get_last_script_info(daily_sync: DailySync):
     assert num_entries_in_db == len(localized_timestamps), 'It should have set up the correct number of test entries.'
 
     latest_run = daily_sync._get_last_script_info()
-    assert latest_run.timestamp == localized_timestamps[0], 'It should have retrieved the newer entry.'
+    assert latest_run.timestamp == localized_timestamps[1], 'It should have retrieved the newest successful entry.'
 
 
-def test_get_last_script_info_first(daily_sync: DailySync):
+def test_get_last_script_info_none(daily_sync: DailySync):
     assert daily_sync._get_last_script_info() is None, 'It should have retrieved no latest run.'
 
 
 def test_init():
     daily_sync = DailySync()
-    assert daily_sync.session, 'It should have created a session.'
     assert daily_sync.current_run_timestamp, 'It should have created a current run timestamp.'
+    assert daily_sync.retriever, 'It should have created a ULS data retriever.'
+    assert daily_sync.session, 'It should have created a session.'
 
 
 def test_init_sunday(mocker: MockerFixture):
@@ -88,10 +89,11 @@ def test_update_script_info_error(daily_sync: DailySync):
     daily_sync._create_script_info_entry()
     daily_sync._update_script_info_error(error_message=error_message)
 
-    assert daily_sync._get_last_script_info().status == DailySyncStatuses.error, \
+    refreshed_entry = daily_sync.session.query(ScriptInfo).get((daily_sync.SCRIPT_NAME, daily_sync.current_run_timestamp))
+    assert refreshed_entry.status == DailySyncStatuses.error, \
         'It should have updated the status to have an error.'
 
-    assert daily_sync._get_last_script_info().error_message == error_message, \
+    assert refreshed_entry.error_message == error_message, \
         'It should have updated the status to have an error message.'
 
 
