@@ -1,5 +1,6 @@
 import uuid
 from os.path import isdir, isfile
+from re import match
 from shutil import rmtree
 
 from db_updater.importers.uls_data_retriever import UlsDataRetriever
@@ -19,14 +20,21 @@ def test_get_day_from_filename(retriever: UlsDataRetriever):
     assert date, 'It should have returned a date from the filename.'
 
 
+def test_licence_filenames(retriever: UlsDataRetriever):
+    all_filenames = retriever.ftp.nlst()
+    assert any(match(r'^a_', filename) for filename in all_filenames), 'It should find some application files in ULS.'
+    assert all(match(r'^l_', filename) for filename in retriever._licence_filenames), \
+        'It should only find license files in ULS.'
+
+
 def test_files_after_date(retriever: UlsDataRetriever):
-    for filename in retriever._files_after_date():
-        assert retriever._get_day_from_filename(filename) >= retriever.process_files_after_datetime,\
+    for filename in retriever._licence_files_after_date():
+        assert retriever._get_day_from_filename(filename) >= retriever.datetime_from,\
             'It should have returned a list of filenames that were modified after the threshold date.'
 
 
 def test_init(retriever: UlsDataRetriever):
-    assert retriever.process_files_after_datetime, 'It should have set a threshold date.'
+    assert retriever.datetime_from, 'It should have set a threshold date.'
     assert retriever.ftp, 'It should have connected to the ULS ftp site.'
 
 

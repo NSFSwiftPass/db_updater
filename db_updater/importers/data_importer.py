@@ -7,8 +7,8 @@ from typing import Any, Dict, Generator, List, Optional
 from sqlalchemy import Table
 from sqlalchemy.sql import Insert
 
-from db_updater.database.connection import Base, Session, engine
-from db_updater.database import db_classes
+from db_updater.database.classes import dds_users_classes
+from db_updater.database.connection import Session
 from db_updater.database.generate_db_classes import generate_db_classes_file
 
 DATA_FILES_DIRECTORY = os.path.join('db_updater', 'database', 'downloaded_data')
@@ -27,8 +27,6 @@ class DataImporter:
         self.delete_all_current_entries = delete_all_current_entries
         self.file_extension = file_extension
         self.directory_path = directory_path
-
-        Base.metadata.create_all(engine)
 
         self.session = Session()
 
@@ -58,7 +56,7 @@ class DataImporter:
         generate_db_classes_file()
 
     def _delete_all_current_entries(self):
-        all_tables = [value for variable_name, value in db_classes.__dict__.items() if
+        all_tables = [value for variable_name, value in dds_users_classes.__dict__.items() if
                       re.match(f'^{TABLE_VARIABLE_NAME_PREFIX}[A-Z]{{2}}', variable_name)]
 
         for table in all_tables:
@@ -69,7 +67,7 @@ class DataImporter:
 
     @staticmethod
     def _find_matching_table(entry_values: List[str]) -> Optional[Table]:
-        return getattr(db_classes, f'{TABLE_VARIABLE_NAME_PREFIX}{entry_values[0]}', None)
+        return getattr(dds_users_classes, f'{TABLE_VARIABLE_NAME_PREFIX}{entry_values[0]}', None)
 
     def _get_entry_insertion(self, entry_line: str) -> Optional[Insert]:
         entry_values = entry_line.split('|')
