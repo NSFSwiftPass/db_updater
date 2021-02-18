@@ -28,10 +28,15 @@ class DataImporter:
 
         self.session = session or Session()
 
-    def import_from_directory(self):
         if self.delete_all_current_entries:
             self._delete_all_current_entries()
-        self._read_and_import_lines()
+
+    def import_from_directory(self):
+        insert_values = self._get_insertions_by_table()
+        for table, inserts in insert_values.items():
+            self.session.execute(table.insert(), inserts)
+
+        self.session.flush()
 
     @staticmethod
     def _pad_entry_values(entry_values: List[str], headers: List[str]) -> None:
@@ -100,10 +105,3 @@ class DataImporter:
         insert_clauses = [self._get_entry_insertion(entry_line=entry_line)
                           for entry_line in self._get_entry_lines_from_directory()]
         return reduce(insertions_by_table, insert_clauses, defaultdict(list))
-
-    def _read_and_import_lines(self):
-        insert_values = self._get_insertions_by_table()
-        for table, inserts in insert_values.items():
-            self.session.execute(table.insert(), inserts)
-
-        self.session.flush()
