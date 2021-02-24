@@ -9,6 +9,7 @@ from sqlalchemy.orm import Query
 
 from db_updater.database.classes import dds_users_classes
 from db_updater.database.connection import Session
+from db_updater.utils import ULS_TIMEZONE
 
 DATA_FILES_DIRECTORY = os.path.join('db_updater', 'database', 'downloaded_data')
 CLASS_VARIABLE_NAME_PREFIX = 'PUBACC'
@@ -51,7 +52,7 @@ class DataImporter:
             column_type = column_info.type.python_type
 
             if column_type == datetime:
-                return datetime.strptime(entry_value, '%m/%d/%Y') if entry_value else None
+                return ULS_TIMEZONE.localize(datetime.strptime(entry_value, '%m/%d/%Y')) if entry_value else None
 
             return column_type(entry_value) if entry_value else None
 
