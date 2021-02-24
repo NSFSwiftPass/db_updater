@@ -23,7 +23,6 @@ Ask another developer for these values
 - DB_URL
 - DB_USERNAME
 - LOG_LEVEL
-- SCHEMA_NAME
 
 ## Getting a DB User Account
 1. Create login for new user

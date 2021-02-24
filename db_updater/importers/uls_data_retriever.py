@@ -126,3 +126,10 @@ class UlsDataRetriever:
                 raise e
 
         check_connection()
+
+
+# if __name__ == '__main__':
+#     retriever = UlsDataRetriever(datetime_from=ULS_TIMEZONE.localize(datetime(year=2021, month=2, day=20)),
+#                                  datetime_to=ULS_TIMEZONE.localize(datetime(year=2021, month=2, day=21)),
+#                                  is_daily=True)
+#     retriever.perform_import_from_uls()

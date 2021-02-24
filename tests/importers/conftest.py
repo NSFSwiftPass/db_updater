@@ -1,12 +1,12 @@
 from datetime import timedelta
 from shutil import rmtree
 
-from pytest import fixture, mark
+from pytest import fixture
 
 from db_updater.database.connection import Session
+from db_updater.importers.data_importer import DataImporter
 from db_updater.importers.uls_data_retriever import UlsDataRetriever
 from db_updater.utils import get_today_uls
-from tests.confest import external_transaction_session
 
 
 @fixture(params=[True, False])
@@ -26,3 +26,8 @@ def retriever(request, external_transaction_session: Session):
             rmtree(new_test_directory)
         except FileNotFoundError as e:
             pass
+
+
+@fixture
+def data_importer(external_transaction_session: Session):
+    return DataImporter(session=external_transaction_session)
