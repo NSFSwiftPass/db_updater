@@ -34,7 +34,8 @@ class DataImporter:
     def import_from_directory(self):
         for entry_line in self._get_entry_lines_from_directory():
             query = self._get_modify_query(entry_line)
-            self.session.execute(query)
+            if query is not None:
+                self.session.execute(query)
 
         self.session.flush()
 
@@ -100,8 +101,12 @@ class DataImporter:
                 for line in file.readlines():
                     yield line.rstrip()
 
-    def _get_modify_query(self, entry_line: str) -> Query:
-        table, entry_values = self._get_entry_values(entry_line=entry_line)
+    def _get_modify_query(self, entry_line: str) -> Optional[Query]:
+        entry_values_with_table = self._get_entry_values(entry_line=entry_line)
+        if not entry_values_with_table:
+            return None
+
+        table, entry_values = entry_values_with_table
         if self._entry_exists(table=table, entry_values=entry_values):
             update_query = self._match_primary_key(table=table, entry_values=entry_values,
                                                    initial_query=table.update())
@@ -125,7 +130,7 @@ class DataImporter:
 
 
 # if __name__ == '__main__':
-#     di = DataImporter(delete_all_current_entries=True,
-#                       file_extension='txt')
-#     di.import_from_directory()
-#     di.session.commit()
+#     data_importer = DataImporter(delete_all_current_entries=True,
+#                                  file_extension='txt')
+#     data_importer.import_from_directory()
+#     data_importer.session.commit()
