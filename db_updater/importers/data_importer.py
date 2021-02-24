@@ -1,13 +1,11 @@
 import os
 import re
-from collections import defaultdict
 from datetime import datetime
-from functools import reduce
 from pathlib import Path
 from typing import Any, Dict, Generator, List, Optional, Tuple
 
 from sqlalchemy import Table
-from sqlalchemy.sql import Insert
+from sqlalchemy.orm import Query
 
 from db_updater.database.classes import dds_users_classes
 from db_updater.database.connection import Session
@@ -34,19 +32,11 @@ class DataImporter:
             self._delete_all_current_entries()
 
     def import_from_directory(self):
-        insert_values = self._get_insertions_by_table()
-        for table, inserts in insert_values.items():
-            self.session.execute(table.insert(), inserts)
+        for entry_line in self._get_entry_lines_from_directory():
+            query = self._get_modify_query(entry_line)
+            self.session.execute(query)
 
         self.session.flush()
-
-    @staticmethod
-    def _pad_entry_values(entry_values: List[str], headers: List[str]) -> None:
-        """
-        Entry values do not always match the length of the headers. Pad with empty values.
-        """
-        for i in range(len(headers) - len(entry_values)):
-            entry_values.append('')
 
     def _convert_entry_values_to_python(self, entry_values: List[str]) -> Dict[str, Any]:
         table = self._find_matching_table(entry_values=entry_values)
@@ -73,6 +63,15 @@ class DataImporter:
 
         self.session.flush()
 
+    def _entry_exists(self, table: Table, entry_values: Dict[str, Any]) -> bool:
+        primary_key = table.primary_key
+        if not len(primary_key):
+            return False
+
+        select_query = self._match_primary_key(table=table, entry_values=entry_values, initial_query=table.select())
+
+        return bool(self.session.execute(select_query).rowcount)
+
     def _find_matching_table(self, entry_values: List[str]) -> Optional[Table]:
         table_id = entry_values[0]
         return self.all_tables.get(table_id, None)
@@ -83,7 +82,7 @@ class DataImporter:
                 for variable_name, table_or_class in dds_users_classes.__dict__.items()
                 if re.match(f'^({CLASS_VARIABLE_NAME_PREFIX}|{TABLE_VARIABLE_NAME_PREFIX})[A-Z]{{2}}', variable_name)}
 
-    def _get_entry_insertion(self, entry_line: str) -> Optional[Tuple[Table, Dict]]:
+    def _get_entry_values(self, entry_line: str) -> Optional[Tuple[Table, Dict[str, Any]]]:
         """
         :param entry_line: The incoming line from ULS
         :return: a tuple with the table to insert into and the dict element to be inserted
@@ -101,15 +100,28 @@ class DataImporter:
                 for line in file.readlines():
                     yield line.rstrip()
 
-    def _get_insertions_by_table(self) -> Dict[Table, List[Insert]]:
-        def insertions_by_table(insertions, insert_clause):
-            if insert_clause:
-                insertions[insert_clause[0]].append(insert_clause[1])
-            return insertions
+    def _get_modify_query(self, entry_line: str) -> Query:
+        table, entry_values = self._get_entry_values(entry_line=entry_line)
+        if self._entry_exists(table=table, entry_values=entry_values):
+            update_query = self._match_primary_key(table=table, entry_values=entry_values,
+                                                   initial_query=table.update())
+            return update_query.values(entry_values)
+        else:
+            return table.insert().values(entry_values)
 
-        insert_clauses = [self._get_entry_insertion(entry_line=entry_line)
-                          for entry_line in self._get_entry_lines_from_directory()]
-        return reduce(insertions_by_table, insert_clauses, defaultdict(list))
+    @staticmethod
+    def _match_primary_key(table: Table, entry_values: Dict[str, Any], initial_query: Query) -> Query:
+        for column in table.primary_key.columns.keys():
+            initial_query = initial_query.where(table.columns[column] == entry_values[column])
+        return initial_query
+
+    @staticmethod
+    def _pad_entry_values(entry_values: List[str], headers: List[str]) -> None:
+        """
+        Entry values do not always match the length of the headers. Pad with empty values.
+        """
+        for i in range(len(headers) - len(entry_values)):
+            entry_values.append('')
 
 
 # if __name__ == '__main__':
